@@ -109,3 +109,5 @@ p2 <- dat5 %>% ggplot(aes(x = month, y=cases)) +
   geom_point()
 p2
 ``` 
+
+**The peak time of corona virus of Australia was in March (see Figure\@ref(p1:cases in each month of Australia)), while that of China was in February (see Figure\@ref(p2:cases in each month of China)). However, until May, the condition of China was greater than in Australia due to the small number of cases. Australia would still need some time to control the virus (\@ref(table:cases per month of Australia)).**
