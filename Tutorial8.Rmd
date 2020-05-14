@@ -57,13 +57,21 @@ covidGBR <- covid19("GBR")
 ```
 
 ```{r}
-bind_rows(covidUSA, covidGBR) %>%
+covidUSAGBR <- bind_rows(covidUSA, covidGBR) %>%
   mutate(deathrate = 100*(deaths/confirmed)) %>%
   filter(!is.na(deathrate)) %>%
-  select(id, date, deaths, confirmed, deathrate) %>%
-  summarise(mean(deathrate))
+  select(id, date, deaths, confirmed, deathrate)
+
+covidUSAGBR %>% summarise(mean(deathrate))
 ```
 
+```{r}
+covidUSAGBR %>%
+  ggplot(aes(x = date, y = deathrate)) +
+  geom_line() +
+  facet_wrap(~ id) +
+  ggtitle("Change in deathrate of COVID19 over time")
+```
 
 
 \section*{Country XX2 and YY2}
