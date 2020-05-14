@@ -50,22 +50,29 @@ library(bookdown)
 
 \section*{Australia and USA}
 
-```{r}
+```{r echo = FALSE, message = FALSE, warning = FALSE}
 library(COVID19)
 covidUSA <- covid19("USA")
 covidGBR <- covid19("GBR")
 ```
 
-```{r}
+We are interested in the impact of COVID19 on the United States of America (USA) and Great Britain (GBR).
+
+From Table \@ref(tab:table) we can see that the countries have significantly different death rates with GBR having an average of 7.2% of confirmed cases resulting in death while USA is much lower at 2.8%.
+
+```{r table}
 covidUSAGBR <- bind_rows(covidUSA, covidGBR) %>%
   mutate(deathrate = 100*(deaths/confirmed)) %>%
   filter(!is.na(deathrate)) %>%
   select(id, date, deaths, confirmed, deathrate)
 
-covidUSAGBR %>% summarise(mean(deathrate))
+covidUSAGBR %>% summarise(mean(deathrate)) %>%
+  kable()
 ```
 
-```{r}
+We can also plot how this value changes over time. Figure \@ref(fig:plot) demonstrates this for both GBR and USA. As can be seen both countries start at a very low death rate for confirmed cases before increasing rapidly. This is followed by a period of steady decline. It should be noted however, that the USA has begun to see a second rise in the deathrate. This may be due to the easing of some restrictions or improvements in testing methods.
+
+```{r plot}
 covidUSAGBR %>%
   ggplot(aes(x = date, y = deathrate)) +
   geom_line() +
