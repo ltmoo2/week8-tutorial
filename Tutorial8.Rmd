@@ -48,7 +48,14 @@ library(bookdown)
 
 
 
-\section*{Country XX1 and YY1"}
+\section*{Australia and USA}
+
+```{r}
+library(COVID19)
+covidUSA <- covid19("USA")
+covidGBR <- covid19("GBR")
+```
+
 
 \section*{Country XX2 and YY2}
 
