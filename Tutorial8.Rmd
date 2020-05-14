@@ -56,6 +56,15 @@ covidUSA <- covid19("USA")
 covidGBR <- covid19("GBR")
 ```
 
+```{r}
+bind_rows(covidUSA, covidGBR) %>%
+  mutate(deathrate = 100*(deaths/confirmed)) %>%
+  filter(!is.na(deathrate)) %>%
+  select(id, date, deaths, confirmed, deathrate) %>%
+  summarise(mean(deathrate))
+```
+
+
 
 \section*{Country XX2 and YY2}
 
