@@ -46,13 +46,53 @@ library(bookdown)
 
 ```
 
+```{r, echo = TRUE, message = FALSE, warning = FALSE}
+dat <- read_csv("Data/worldwidecases.csv")
+```
+
+\section*{Country Australia and China}
 
 
-\section*{Country XX1 and YY1"}
+# The number of cases in each month of Australia
+```{r}
+# process the data to only contains information of Australia 
+dat2 <- dat %>% dplyr::filter(countriesAndTerritories %in% c("Australia")
+                                                          
+)
+```
 
-\section*{Country XX2 and YY2}
 
-\section*{Country XX3 and YY3}
+```{r}
+dat3 <- dat2 %>% dplyr::select(month,
+                cases)
+
+dat3 <- dat3 %>%
+  group_by(month) %>%
+  summarise_at(vars(cases),
+               list(cases = sum))
+
+kable(dat3, caption = "cases per month of Australia") %>%
+  kable_styling(bootstrap_options = c("striped", "hover"))
+```
+
+# The number of cases in each month of China
+```{r}
+# process the data to only contains information of China 
+dat4 <- dat %>% dplyr::filter(countriesAndTerritories %in% c("China")
+                                                          
+)
+```
 
 
+```{r}
+dat5 <- dat4 %>% dplyr::select(month,
+                cases)
 
+dat5 <- dat5 %>%
+  group_by(month) %>%
+  summarise_at(vars(cases),
+               list(cases = sum))
+
+kable(dat5, caption = "cases per month of China") %>%
+  kable_styling(bootstrap_options = c("striped", "hover"))
+```
