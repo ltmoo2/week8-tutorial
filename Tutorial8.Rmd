@@ -75,6 +75,12 @@ kable(dat3, caption = "cases per month of Australia") %>%
   kable_styling(bootstrap_options = c("striped", "hover"))
 ```
 
+```{r}
+p1 <- dat3 %>% ggplot(aes(x = month, y=cases)) +
+  ggtitle("p1: cases in each month of Australia") +
+  geom_point()
+p1
+``` 
 # The number of cases in each month of China
 ```{r}
 # process the data to only contains information of China 
@@ -96,3 +102,10 @@ dat5 <- dat5 %>%
 kable(dat5, caption = "cases per month of China") %>%
   kable_styling(bootstrap_options = c("striped", "hover"))
 ```
+
+```{r}
+p2 <- dat5 %>% ggplot(aes(x = month, y=cases)) +
+  ggtitle("p2: cases in each month of China") +
+  geom_point()
+p2
+``` 
